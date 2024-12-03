@@ -1,0 +1,21 @@
+{
+    "name": "homescope-frontend",
+    "version": "1.0.0",
+    "description": "Frontend for HomeScope web application",
+    "main": "index.js",
+    "scripts": {
+      "start": "echo 'Frontend is static; no start script required'",
+      "test": "jest"
+    },
+    "dependencies": {
+      "bootstrap": "^5.3.0",
+      "axios": "^1.4.0"
+    },
+    "devDependencies": {
+      "eslint": "^8.0.0",
+      "jest": "^29.0.0"
+    },
+    "author": "Caleb",
+    "license": "MIT"
+  }
+  

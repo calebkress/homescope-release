@@ -1,0 +1,14 @@
+flask
+flask-cors
+pandas
+numpy
+scikit-learn
+joblib
+matplotlib
+plotly
+gunicorn
+python-dotenv
+boto3
+pytest
+flask-testing
+black
