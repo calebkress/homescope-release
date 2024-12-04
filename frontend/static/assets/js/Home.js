@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".custom-form");
   const resultContainer = document.getElementById("resultContainer");
+  const loadingIndicator = document.createElement("div");
+  loadingIndicator.textContent = "Calculating...";
+  loadingIndicator.style.display = "none";
+  loadingIndicator.classList.add("loading-indicator");
+  resultContainer.parentNode.insertBefore(loadingIndicator, resultContainer);
 
-  // Form Data Object
-  const formData = {};
+  const formData = {}; // Object to store form data
 
-  // Event Listener for Form Submission
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -15,14 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Validate Form Inputs
   function validateForm() {
     const errorMessages = document.querySelectorAll(".text-danger");
     errorMessages.forEach((error) => (error.textContent = "")); // Clear previous errors
 
     let isValid = true;
-
-    // List of fields to validate
     const fieldsToValidate = [
       { name: "bedrooms", type: "number" },
       { name: "bathrooms", type: "number", validate: validateBathrooms },
@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
       { name: "purchaseYear", type: "year", validate: validatePurchaseYear },
     ];
 
-    // Validate each field
     fieldsToValidate.forEach(({ name, type, validate }) => {
       const field = form.querySelector(`[name="${name}"]`);
       const value = field ? field.value.trim() : null;
@@ -46,14 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
         showError(name, `Please enter a valid ${name}.`);
         isValid = false;
       } else if (validate && !validate(value)) {
-        isValid = false; // Error messages are handled in the validate function
+        isValid = false;
       }
     });
 
     return isValid;
   }
 
-  // Custom Validators
   function validateBathrooms(value) {
     if (value % 1 !== 0 && value % 1 !== 0.5) {
       showError("bathrooms", "Bathrooms must be an integer or end in .5.");
@@ -71,13 +69,11 @@ document.addEventListener("DOMContentLoaded", function () {
     return true;
   }
 
-  // Display Error Message
   function showError(fieldName, message) {
     const errorElement = document.getElementById(`${fieldName}Error`);
     if (errorElement) errorElement.textContent = message;
   }
 
-  // Collect Form Data
   function collectFormData() {
     const fields = [
       "address",
@@ -105,26 +101,60 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Calculate Price Logic
   function calculatePrice() {
-    let totalPrice = 300000;
+    const apiUrl = "/api/predict";
+    const requestData = {
+      address: formData.address,
+      latitude: parseFloat(formData.latitude) || null,
+      longitude: parseFloat(formData.longitude) || null,
+      zipCode: formData.zipCode,
+      bedrooms: parseInt(formData.bedrooms, 10) || 0,
+      bathrooms: parseFloat(formData.bathrooms) || 0,
+      garageSpaces: parseInt(formData.garageSpaces, 10) || 0,
+      yearBuilt: parseInt(formData.yearBuilt, 10) || 0,
+      patiosPorches: parseInt(formData.patiosPorches, 10) || 0,
+      lotSize: parseInt(formData.lotSize, 10) || 0,
+      houseSize: parseInt(formData.houseSize, 10) || 0,
+      numStories: parseInt(formData.numStories, 10) || 0,
+      hasHoa: formData.hasHoa === "yesHoa" ? 1 : 0,
+      appliances: parseInt(formData.appliances, 10) || 0,
+      purchaseYear: parseInt(formData.purchaseYear, 10) || new Date().getFullYear(),
+    };
 
-    totalPrice += (parseInt(formData.bedrooms) || 0) * 50000;
-    totalPrice += (parseInt(formData.bathrooms) || 0) * 30000;
-    totalPrice += (parseInt(formData.garageSpaces) || 0) * 20000;
-    totalPrice += Math.max(0, 2000 - parseInt(formData.yearBuilt) || 0) * 2000;
-    totalPrice += (parseInt(formData.patiosPorches) || 0) * 10000;
-    totalPrice += ((parseInt(formData.lotSize) || 0) / 100) * 5000;
-    totalPrice += ((parseInt(formData.houseSize) || 0) / 100) * 10000;
-    totalPrice += Math.max(0, (parseInt(formData.numStories) || 1) - 1) * 30000;
+    // Display loading indicator
+    loadingIndicator.style.display = "block";
+    resultContainer.textContent = "";
 
-    // Final adjustment
-    totalPrice += totalPrice * 0.012;
-
-    displayResult(`Estimated Price: $${totalPrice.toFixed(2)}`);
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.prediction) {
+          displayResult(`Estimated Price: $${parseFloat(data.prediction).toFixed(2)}`);
+        } else {
+          displayResult("Prediction not available. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching prediction:", error);
+        displayResult("An error occurred while fetching the prediction.");
+      })
+      .finally(() => {
+        // Hide loading indicator
+        loadingIndicator.style.display = "none";
+      });
   }
 
-  // Display Result
   function displayResult(resultText) {
     resultContainer.textContent = resultText;
   }
