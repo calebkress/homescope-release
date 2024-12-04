@@ -12,7 +12,7 @@ app = Flask(
 
 CORS(app)
 
-# Load the trained model
+# Load trained model
 MODEL_PATH = '../../model/lightgbm_model.pkl'
 try:
     model = joblib.load(MODEL_PATH)
