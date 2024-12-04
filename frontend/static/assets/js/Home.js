@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
       lotSize: parseInt(formData.lotSize, 10) || 0,
       houseSize: parseInt(formData.houseSize, 10) || 0,
       numStories: parseInt(formData.numStories, 10) || 0,
-      hasHoa: formData.hasHoa === "Yes" ? 1 : 0,
+      hasHoa: formData.hasHoa,
       appliances: parseInt(formData.appliances, 10) || 0,
       purchaseYear: parseInt(formData.purchaseYear, 10) || new Date().getFullYear(),
     };
