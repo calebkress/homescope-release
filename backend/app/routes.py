@@ -14,6 +14,8 @@ load_dotenv()
 # Retrieve API key
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
+print(GOOGLE_API_KEY)
+
 app = Flask(
     __name__, 
     static_folder='../../frontend/static', 
