@@ -1,0 +1,29 @@
+import pandas as pd
+import numpy as np
+
+# Load dataset
+file_path = '../data/austinHousingData.csv'  # Update path if needed
+df = pd.read_csv(file_path)
+
+# Drop irrelevant columns
+irrelevant_columns = [
+    'streetAddress', 'description', 'latestPriceSource', 'homeImage', 'hasGarage', 'zpid',
+    'city', 'homeType', 'latest_saledate'  # If you don't need them
+]
+
+df.drop(columns=irrelevant_columns, inplace=True, errors='ignore')
+
+# Drop low-importance columns
+low_importance_columns = ['numOfAccessibilityFeatures', 'numOfCommunityFeatures', 
+                          'hasCooling', 'hasHeating', 'numOfWindowFeatures', 
+                          'numOfSecurityFeatures', 'hasView', 'parkingSpaces', 
+                          'propertyTaxRate', 'hasSpa', 'numOfWaterfrontFeatures']
+df.drop(columns=low_importance_columns, inplace=True)
+
+# Drop rows with missing values
+df.dropna(inplace=True)
+
+# Save the cleaned dataset for future steps
+cleaned_file_path = '../data/austinHousingData_cleaned.csv'
+df.to_csv(cleaned_file_path, index=False)
+print(f"Cleaned dataset saved at {cleaned_file_path}")
