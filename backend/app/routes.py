@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+import numpy as np
+import pandas as pd
+import joblib
 
 app = Flask(
     __name__, 
@@ -8,6 +11,14 @@ app = Flask(
 )
 
 CORS(app)
+
+# Load the trained model
+MODEL_PATH = '../../model/lightgbm_model.pkl'
+try:
+    model = joblib.load(MODEL_PATH)
+    print("Model loaded successfully.")
+except Exception as e:
+    print(f"Error loading model: {e}")
 
 # homempage render route
 @app.route('/')
