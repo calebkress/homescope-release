@@ -36,26 +36,24 @@
             <form id="myForm" class="custom-form" style="font-family: Cabin, sans-serif;">
                 <h1 style="font-size: 30px;">Estimate Form</h1>
                 <div class="row form-group">
-                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="type-input-field" style="font-size: 16px;">Home Type:</label></div>
+                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="type-input-field" style="font-size: 16px;">Address:</label></div>
                     <div class="col-sm-6 input-column">
-                        <select class="form-control" id="homeType" name="homeType">
-                            <option value="">Select Type</option>
-                            <option value="homeType_Single Family">Single Family</option>
-                            <option value="homeType_MultiFamily">Multi-Family</option>
-                            <option value="homeType_Condo">Condo</option>
-                            <option value="homeType_Townhouse">Townhouse</option>
-                            <option value="homeType_Multiple Occupancy">Multiple Occupancy</option>
-                            <option value="homeType_Mobile / Manufactured">Mobile/Manufactured</option>
-                            <option value="homeType_Vacant Land">Vacant Land</option>
-                        </select>
-                        <div id="homeTypeError" class="text-danger"></div>
+                        <input class="form-control" type="text" id="address" name="address">
+                        <div id="addressError" class="text-danger"></div>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Zipcode:</label></div>
+                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">House Size (sq. ft.):</label></div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" id="zipCode" name="zipCode">
-                        <div id="zipCodeError" class="text-danger"></div>
+                        <input class="form-control" type="number" id="houseSize" name="houseSize">
+                        <div id="houseSizeError" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Lot Size (sq. ft.):</label></div>
+                    <div class="col-sm-6 input-column">
+                        <input class="form-control" type="number" id="lotSize" name="lotSize">
+                        <div id="lotSizeError" class="text-danger"></div>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -73,34 +71,6 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Year Built:</label></div>
-                    <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" id="yearBuilt" name="yearBuilt">
-                        <div id="yearBuiltError" class="text-danger"></div>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Patios/Porches:</label></div>
-                    <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" id="patiosPorches" name="patiosPorches">
-                        <div id="patiosPorchesError" class="text-danger"></div>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Lot Size (sq. ft.):</label></div>
-                    <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" id="lotSize" name="lotSize">
-                        <div id="lotSizeError" class="text-danger"></div>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">House Size (sq. ft.):</label></div>
-                    <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" id="houseSize" name="houseSize">
-                        <div id="houseSizeError" class="text-danger"></div>
-                    </div>
-                </div>
-                <div class="row form-group">
                     <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Number of Stories:</label></div>
                     <div class="col-sm-6 input-column">
                         <input class="form-control" type="number" id="numStories" name="numStories">
@@ -108,10 +78,42 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Garage Spaces:</label></div>
+                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;"> Number of Patios/Porches:</label></div>
+                    <div class="col-sm-6 input-column">
+                        <input class="form-control" type="number" id="patiosPorches" name="patiosPorches">
+                        <div id="patiosPorchesError" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Number of Garage Spaces:</label></div>
                     <div class="col-sm-6 input-column">
                         <input class="form-control" type="number" id="garageSpaces" name="garageSpaces">
                         <div id="garageSpacesError" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Number of Appliances Included:</label></div>
+                    <div class="col-sm-6 input-column">
+                        <input class="form-control" type="number" id="appliances" name="appliances">
+                        <div id="appliancesError" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="name-input-field" style="font-size: 16px;">Year Built:</label></div>
+                    <div class="col-sm-6 input-column">
+                        <input class="form-control" type="number" id="yearBuilt" name="yearBuilt">
+                        <div id="yearBuiltError" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="type-input-field" style="font-size: 16px;">Has HOA:</label></div>
+                    <div class="col-sm-6 input-column">
+                        <select class="form-control" id="hasHoa" name="hasHoa">
+                            <option value="">Please Select</option>
+                            <option value="yesHoa">Yes</option>
+                            <option value="noHoa">No</option>
+                        </select>
+                        <div id="hasHoaError" class="text-danger"></div>
                     </div>
                 </div>
                 <div class="row form-group">
