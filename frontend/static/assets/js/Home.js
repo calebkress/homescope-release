@@ -105,8 +105,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const apiUrl = "/api/predict";
     const requestData = {
       address: formData.address,
-      latitude: parseFloat(formData.latitude) || null,
-      longitude: parseFloat(formData.longitude) || null,
+      latitude: parseFloat(formData.latitude),
+      longitude: parseFloat(formData.longitude),
       zipCode: formData.zipCode,
       bedrooms: parseInt(formData.bedrooms, 10) || 0,
       bathrooms: parseFloat(formData.bathrooms) || 0,
