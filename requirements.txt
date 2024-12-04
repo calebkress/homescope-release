@@ -12,3 +12,5 @@ boto3
 pytest
 flask-testing
 black
+jupyter
+lightgbm
