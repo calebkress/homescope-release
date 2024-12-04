@@ -29,11 +29,11 @@ model_path = os.path.join(os.path.dirname(__file__), "../../model/lightgbm_model
 model_path = os.path.abspath(model_path)
 
 # Load the model
-# try:
-#     with open(model_path, "rb") as f:
-#         model = Booster(model_file=model_path)
-# except FileNotFoundError as e:
-#     print(f"Error loading model: {e}")
+try:
+    with open(model_path, "rb") as f:
+        model = Booster(model_file=model_path)
+except FileNotFoundError as e:
+    print(f"Error loading model: {e}")
 
 # homempage render route
 @app.route('/')
@@ -120,15 +120,13 @@ def predict():
         }
 
         # # Convert input to model-compatible format (e.g., Pandas DataFrame or numpy array)
-        # input_df = pd.DataFrame([model_input])
+        input_df = pd.DataFrame([model_input])
 
-        # # Make prediction
-        # prediction = model.predict(input_df)[0]  # Assuming model is a LightGBM Booster
+        # Make prediction
+        prediction = model.predict(input_df)[0]  # Assuming model is a LightGBM Booster
 
-        # # Return the result
-        # return jsonify({"prediction": round(prediction, 2), "address": address})
-
-        return
+        # Return the result
+        return jsonify({"prediction": round(prediction, 2), "address": address})
     
 
     except Exception as e:
