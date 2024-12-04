@@ -29,3 +29,6 @@ yarn-error.log*
 *.pem
 *.key
 .env
+
+# Ignore data directory
+/models/data/
