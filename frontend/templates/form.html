@@ -14,10 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/MultiForm.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/Pretty-Registration-Form-.css') }}">
     <script
-    src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places"
-    async
-    defer
-    ></script>
+    src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places" loading="lazy"></script>
 </head>
 
 <body>
@@ -44,6 +41,9 @@
                     <div class="col-sm-4 col-xl-4 label-column"><label class="col-form-label" for="type-input-field" style="font-size: 16px;">Address:</label></div>
                     <div class="col-sm-6 input-column">
                         <input class="form-control" type="text" id="address" name="address">
+                        <input type="hidden" id="latitude" name="latitude">
+                        <input type="hidden" id="longitude" name="longitude">
+                        <input type="hidden" id="zipCode" name="zipCode">
                         <div id="addressError" class="text-danger"></div>
                     </div>
                 </div>
@@ -136,6 +136,7 @@
     <script src="{{ url_for('static', filename='assets/js/bs-init.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/grayscale.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/Home.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/Maps.js') }}"></script>
 </body>
 
 </html>
