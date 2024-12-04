@@ -131,6 +131,9 @@ def predict():
             "LatLonInteraction": lat_lon_interaction
         }])
 
+        input_df = pd.DataFrame([model_input])
+        print(input_df)
+
         # Make prediction
         prediction = model.predict(model_input)[0]
 
