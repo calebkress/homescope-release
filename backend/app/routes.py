@@ -3,6 +3,8 @@ from flask_cors import CORS
 import numpy as np
 import pandas as pd
 import joblib
+import os
+from lightgbm import Booster
 
 app = Flask(
     __name__, 
@@ -12,12 +14,15 @@ app = Flask(
 
 CORS(app)
 
-# Load trained model
-MODEL_PATH = '../../model/lightgbm_model.pkl'
+# Get the absolute path to the model
+model_path = os.path.join(os.path.dirname(__file__), "../../model/lightgbm_model.pkl")
+model_path = os.path.abspath(model_path)
+
+# Load the model
 try:
-    model = joblib.load(MODEL_PATH)
-    print("Model loaded successfully.")
-except Exception as e:
+    with open(model_path, "rb") as f:
+        model = Booster(model_file=model_path)
+except FileNotFoundError as e:
     print(f"Error loading model: {e}")
 
 # homempage render route
