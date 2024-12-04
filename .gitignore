@@ -24,11 +24,9 @@ yarn-error.log*
 .idea/
 .vscode/
 *.swp
+*.csv
 
 # Deployment
 *.pem
 *.key
 .env
-
-# Ignore data directory
-/models/data/
