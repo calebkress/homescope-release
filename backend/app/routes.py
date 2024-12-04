@@ -131,11 +131,15 @@ def predict():
             "LatLonInteraction": lat_lon_interaction
         }])
 
-        input_df = pd.DataFrame([model_input])
-        print(input_df)
+        # Debugging: Log the input being sent to the model
+        print("Model Input:")
+        print(model_input)
 
         # Make prediction
         prediction = model.predict(model_input)[0]
+
+        # Debugging: Log the prediction value
+        print(f"Prediction: {prediction}")
 
         # Return response
         return jsonify({"prediction": round(prediction, 2)})
