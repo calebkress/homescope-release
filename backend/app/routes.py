@@ -25,7 +25,7 @@ app = Flask(
 CORS(app)
 
 # Get the absolute path to the model
-model_path = os.path.join(os.path.dirname(__file__), "../../model/lightgbm_model.txt")
+model_path = os.path.join(os.path.dirname(__file__), "../../model/lightgbm_tuned_model.txt")
 model_path = os.path.abspath(model_path)
 
 # Load the model
