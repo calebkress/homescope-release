@@ -4,7 +4,7 @@ import seaborn as sns
 from scipy.stats import skew
 
 # Load cleaned dataset
-file_path = 'austinHousingData_cleaned.csv'
+file_path = '../data/austinHousingData_cleaned.csv'
 df = pd.read_csv(file_path)
 
 # Summary statistics
@@ -20,15 +20,6 @@ print("\nSkewness of Numerical Features:")
 numerical_features = df.select_dtypes(include=['float64', 'int64']).columns
 skewness = df[numerical_features].apply(lambda x: skew(x.dropna())).sort_values(ascending=False)
 print(skewness)
-
-# Visualize distributions of key numerical features
-plt.figure(figsize=(15, 10))
-for i, column in enumerate(numerical_features, 1):
-    plt.subplot(4, 4, i)
-    sns.histplot(df[column], kde=True)
-    plt.title(f"Distribution: {column}")
-plt.tight_layout()
-plt.show()
 
 # Heatmap of correlations
 plt.figure(figsize=(12, 8))
