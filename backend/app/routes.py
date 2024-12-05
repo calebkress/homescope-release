@@ -85,7 +85,9 @@ def health_check():
 @app.route('/api/predict', methods=['POST'])
 def predict():
     try:
-        form_data = request.json  
+        form_data = request.json
+
+        print(form_data)
         # extract features
         zipcode = int(form_data.get("zipCode", 0))
         latitude = float(form_data.get("latitude", 0.0))
