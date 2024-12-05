@@ -101,12 +101,6 @@ def predict():
         num_stories = int(form_data.get("numStories", 0))
         patios_porches = int(form_data.get("patiosPorches", 0))
 
-        # derived features
-        price_per_sqft = house_size / lot_size if lot_size > 0 else 0
-        bath_bed_ratio = bathrooms / bedrooms if bedrooms > 0 else 0
-        lot_living_ratio = lot_size / house_size if house_size > 0 else 0
-        garage_bed_ratio = garage_spaces / bedrooms if bedrooms > 0 else 0
-        lat_lon_interaction = latitude * longitude
 
         # create input for model
         model_input = pd.DataFrame([{
@@ -117,18 +111,12 @@ def predict():
             "hasAssociation": has_hoa,
             "yearBuilt": year_built,
             "numOfAppliances": appliances,
-            "numOfParkingFeatures": garage_spaces,  
             "numOfPatioAndPorchFeatures": patios_porches,
             "lotSizeSqFt": lot_size,
             "livingAreaSqFt": house_size,
             "numOfBathrooms": bathrooms,
             "numOfBedrooms": bedrooms,
-            "numOfStories": num_stories,
-            "PricePerSqFt": price_per_sqft,
-            "BathBedRatio": bath_bed_ratio,
-            "LotLivingRatio": lot_living_ratio,
-            "GarageBedRatio": garage_bed_ratio,
-            "LatLonInteraction": lat_lon_interaction
+            "numOfStories": num_stories
         }])
 
         # Debugging: Log the input being sent to the model
